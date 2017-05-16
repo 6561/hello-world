@@ -44,16 +44,26 @@ public abstract class MathUtil {
     }
     return true;
   }
-  private static List<Integer> prime=new ArrayList<Integer>();
+  
+  private static List<Integer> primes=new ArrayList<Integer>();
+  
   static {
-      
-  }
-  public static int nthPrime(int n){
-    
-    return primes.get(n-1);
-    
+      primes.add(2);
+      primes.add(3);
+      fillPrimesToVal(256);
   }
   
+  public static int nthPrime(int n){
+    while (n>primes.size()-1)
+      fillPrimesToVal(primes.get(primes.size()-1)+100);
+    return primes.get(n-1);
+  }
+  
+  private static void fillPrimesToVal(int val){
+    for (int i=primes.get(primes.size()-1)+2;i<val;i+=2)
+      if (isPrime(i))
+        primes.add(i);
+  }
   
   
   
@@ -72,19 +82,3 @@ public abstract class MathUtil {
   
   
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
